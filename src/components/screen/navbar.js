@@ -1,0 +1,53 @@
+import React, { Component } from "react";
+import Status from "../util components/status";
+import StatusCard from "../util components/status_card";
+
+export default class Navbar extends Component {
+  constructor() {
+    super();
+    this.state = {
+      status_card: false,
+    };
+  }
+
+  render() {
+    return (
+      <div
+        className="main-navbar-vp absolute top-0 right-0 w-screen shadow-md flex flex-nowrap justify-between items-center bg-ub-grey text-ubt-grey text-sm select-none z-50"
+        style={{ opacity: 0.9 }}
+      >
+        <div
+          tabIndex="0"
+          className={
+            "pl-3 pr-3 outline-none transition duration-100 ease-in-out border-b-2 border-transparent focus:border-ubb-orange py-1 "
+          }
+        >
+          <img
+            src="https://gcdnb.pbrd.co/images/J2aM7vUOgLyw.png"
+            className="w-5 h-5 "
+          />
+        </div>
+        <div
+          id="status-bar"
+          tabIndex="0"
+          onFocus={() => {
+            this.setState({ status_card: true });
+          }}
+          onBlur={() => {
+            this.setState({ status_card: false });
+          }}
+          className={
+            "relative pr-3 pl-3 outline-none transition duration-100 ease-in-out border-b-2 border-transparent focus:border-ubb-orange py-1 "
+          }
+        >
+          <Status />
+          <StatusCard
+            shutDown={this.props.shutDown}
+            lockScreen={this.props.lockScreen}
+            visible={this.state.status_card}
+          />
+        </div>
+      </div>
+    );
+  }
+}
